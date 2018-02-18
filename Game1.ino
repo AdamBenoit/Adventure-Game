@@ -71,7 +71,7 @@ byte exitKey[8] = {
 	0b00000
 };
 
-byte enemy[8] = { 
+byte enemy[8] = {
 	0b01010,
 	0b01110,
 	0b01110,
@@ -101,39 +101,40 @@ byte gold[8] = {
 // 6 - Key 4                                                                                                                                                                                                                                                                                                        h
 
 int map1[14][14] = {
-	{1,1,1,1,1,2,1,1,1,1,1,1,1,1},
-	{1,1,1,0,1,0,1,0,0,0,0,5,0,1},
-	{1,0,0,0,1,0,1,1,4,1,1,1,0,1},
-	{1,0,1,0,0,0,0,0,0,1,0,0,0,1},
-	{1,0,1,1,1,1,1,1,1,1,1,1,0,1},
-	{1,0,4,1,0,0,4,0,0,0,0,0,0,1},
-	{1,1,1,1,0,1,1,1,1,1,1,1,0,1},
-	{1,6,5,1,0,0,0,0,4,0,0,1,1,1},
-	{1,0,0,4,0,1,0,0,1,5,5,1,5,1},
-	{1,0,1,1,0,1,4,1,1,1,1,1,0,1},
-	{1,0,1,0,0,1,0,0,0,0,0,0,0,1},
-	{1,0,4,0,1,1,0,5,1,0,1,1,1,1},
-	{1,5,1,0,0,0,0,5,1,0,0,0,0,3},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+	{ 1,1,1,1,1,2,1,1,1,1,1,1,1,1 },
+	{ 1,1,1,0,1,0,1,0,4,0,0,5,0,1 },
+	{ 1,0,0,0,1,0,1,1,0,1,1,1,0,1 },
+	{ 1,0,1,0,0,0,0,0,0,1,0,0,0,1 },
+	{ 1,0,1,1,1,1,1,1,1,1,1,1,0,1 },
+	{ 1,0,4,1,0,0,4,0,0,0,0,0,0,1 },
+	{ 1,1,1,1,0,1,1,1,1,1,1,1,0,1 },
+	{ 1,6,5,1,0,0,0,0,4,0,0,1,1,1 },
+	{ 1,0,0,4,0,1,0,0,1,5,5,1,5,1 },
+	{ 1,0,1,1,0,1,4,1,1,1,1,1,0,1 },
+	{ 1,0,1,0,0,1,0,0,0,0,0,0,0,1 },
+	{ 1,0,4,0,1,1,0,5,1,0,1,1,1,1 },
+	{ 1,5,1,0,0,0,0,5,1,0,0,0,0,3 },
+	{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1 }
 };
 
 String splashScreen1 = "  Test Game 1  ";
 String splashScreen2 = "  Adam Benoit   ";
 String WinScreen1 = "   You Won!!!  ";
+String LoseScreen1 = "   You Lost!!!  ";
 
-int last_key, 
-	key, 
-	charCol, 
-	charRow, 
-	colMax, 
-	rowMax, 
-	curChar, 
-	bkgPos, 
-	lives, 
-	score,
-	visibleRow,
-	hudCounter,
-	kills;
+int last_key,
+key,
+charCol,
+charRow,
+colMax,
+rowMax,
+curChar,
+bkgPos,
+lives,
+score,
+visibleRow,
+hudCounter,
+kills;
 
 bool hasKey, hasWon;
 
@@ -149,13 +150,13 @@ void setup()
 	score = 0;
 	kills = 0;
 
-	
+
 	hasKey = false;
 	hasWon = false;
-	
+
 	hudCounter = 0;
-	
-	
+
+
 	lcd.begin(rowMax, colMax);
 	lcd.clear();
 
@@ -210,28 +211,28 @@ void printTile(int id)
 {
 	switch (id)
 	{
-		default:
-		case 0:
-			lcd.print((char)254);
-			break;
-		case 1:
-			lcd.print((char)255);
-			break;
-		case 2:
-			lcd.write(byte(1));
-			break;
-		case 3:
-			lcd.write(byte(1));
-			break;
-		case 4:
-			lcd.write(byte(2));
-			break;
-		case 5:
-			lcd.write(byte(3));
-			break;
-		case 6:
-			lcd.write(byte(4));
-			break;
+	default:
+	case 0:
+		lcd.print((char)254);
+		break;
+	case 1:
+		lcd.print((char)255);
+		break;
+	case 2:
+		lcd.write(byte(1));
+		break;
+	case 3:
+		lcd.write(byte(1));
+		break;
+	case 4:
+		lcd.write(byte(2));
+		break;
+	case 5:
+		lcd.write(byte(3));
+		break;
+	case 6:
+		lcd.write(byte(4));
+		break;
 	}
 }
 
@@ -250,7 +251,7 @@ bool collision()
 	case KEY_DOWN:
 		r++;
 		break;
-	case KEY_LEFT:		
+	case KEY_LEFT:
 		c--;
 		break;
 	case KEY_NONE:
@@ -265,7 +266,7 @@ bool collision()
 		return true;
 	case 1:
 	case 2:
-			return false;
+		return false;
 	case 3:
 		if (hasKey)
 		{
@@ -276,7 +277,7 @@ bool collision()
 		{
 			return false;
 		}
-	case 4: 
+	case 4:
 		lives--;
 		charCol = 5;
 		charRow = 1;
@@ -289,6 +290,7 @@ bool collision()
 	case 6:
 		hasKey = true;
 		map1[r][c] = 0;
+		return true;
 	default:
 		return false;
 	}
@@ -312,18 +314,11 @@ void moveChar()
 			charCol++;
 			curChar = 7;
 		}
-				break;
+		break;
 	case KEY_UP:
 		if (collision())
 		{
-			if (charRow == 0)
-			{
-				charRow = 1;
-			}
-			/*else
-			{
-				charRow = 0;
-			}*/
+			charRow = 1;
 			visibleRow--;
 			curChar = 5;
 		}
@@ -331,33 +326,30 @@ void moveChar()
 	case KEY_DOWN:
 		if (collision())
 		{
-			if (charRow == 1)
-			{
-				charRow = 0;
-			}
+			charRow = 0;
 			visibleRow++;
 			curChar = 5;
 		}
 		break;
 	case KEY_SELECT:
-		if (map1[r+1][c] == 4)
+		if (map1[r + 1][c] == 4)
 		{
-			map1[r+1][c] = 0;
+			map1[r + 1][c] = 0;
 			kills++;
 		}
-		else if (map1[r-1][c] == 4)
+		else if (map1[r - 1][c] == 4)
 		{
-			map1[r-1][c] = 0;
+			map1[r - 1][c] = 0;
 			kills++;
 		}
-		else if (map1[r][c+1] == 4)
+		else if (map1[r][c + 1] == 4)
 		{
-			map1[r][c+1] = 0;
+			map1[r][c + 1] = 0;
 			kills++;
 		}
-		else if ( map1[r][c-1] == 4)
+		else if (map1[r][c - 1] == 4)
 		{
-			map1[r][c-1] = 0;
+			map1[r][c - 1] = 0;
 			kills++;
 		}
 
@@ -372,7 +364,11 @@ void moveChar()
 
 void loop()
 {
-	if (!hasWon)
+	if (lives == 0 || hasWon)
+	{
+		endGame();
+	}
+	else
 	{
 		last_key = keypad.get_last_key();
 		key = keypad.read_key();
@@ -387,10 +383,6 @@ void loop()
 		}
 		delay(10); // optional, but recommended if you are not debouncing the keys
 	}
-	else
-	{
-		win();
-	}
 }
 
 void splash() {
@@ -401,11 +393,18 @@ void splash() {
 	delay(1500);
 }
 
-void win()
+void endGame()
 {
 	lcd.clear();
 	lcd.setCursor(0, 0);
-	lcd.print(WinScreen1);
+	if (score == 0)
+	{
+		lcd.print(LoseScreen1);
+	}
+	else
+	{
+		lcd.print(WinScreen1);
+	}
 	lcd.setCursor(3, 1);
 	lcd.print("$");
 	lcd.setCursor(4, 1);
