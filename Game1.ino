@@ -1,17 +1,10 @@
-// Demo of a Keypad LCD Shield
-// Common design sold by DFRobot, various vendors on eBay etc
-
 #include <LiquidCrystal.h>
 #include <DFR_LCD_Keypad.h>
 
-// this is factory config shield initialisation
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
-// below is for shield which has been modified (author's shield)
-//LiquidCrystal lcd(8,3,4,5,6,7); 
-
-// initialise the keypad
 DFR_LCD_Keypad keypad(A0, &lcd);
+
 byte heart[8] = {
 	0b00000,
 	0b01010,
@@ -22,6 +15,7 @@ byte heart[8] = {
 	0b00100,
 	0b00000
 };
+
 byte guy[8] = {
 	0b01110,
 	0b01010,
@@ -32,6 +26,7 @@ byte guy[8] = {
 	0b01010,
 	0b10001
 };
+
 byte guyL[8] = {
 	0b11100,
 	0b10100,
@@ -42,6 +37,7 @@ byte guyL[8] = {
 	0b01010,
 	0b10001
 };
+
 byte guyR[8] = {
 	0b00111,
 	0b00101,
@@ -52,6 +48,7 @@ byte guyR[8] = {
 	0b01010,
 	0b10001
 };
+
 byte door[8] = {
 	0b01110,
 	0b11111,
@@ -62,6 +59,7 @@ byte door[8] = {
 	0b11111,
 	0b11111
 };
+
 byte exitKey[8] = {
 	0b00000,
 	0b01110,
@@ -72,6 +70,7 @@ byte exitKey[8] = {
 	0b00110,
 	0b00000
 };
+
 byte enemy[8] = { 
 	0b01010,
 	0b01110,
@@ -82,6 +81,7 @@ byte enemy[8] = {
 	0b01010,
 	0b10001
 };
+
 byte gold[8] = {
 	0b00000,
 	0b00100,
@@ -147,12 +147,15 @@ void setup()
 	visibleRow = 0;
 	lives = 3;
 	score = 0;
-	lcd.flush();
-	hasKey = false;
-	hasWon = false;
-	hudCounter = 0;
 	kills = 0;
 
+	
+	hasKey = false;
+	hasWon = false;
+	
+	hudCounter = 0;
+	
+	
 	lcd.begin(rowMax, colMax);
 	lcd.clear();
 
@@ -277,6 +280,7 @@ bool collision()
 		lives--;
 		charCol = 5;
 		charRow = 1;
+		visibleRow = 0;
 		return false;
 	case 5:
 		score++;
@@ -448,7 +452,5 @@ void hud() {
 	{
 		hudCounter = 0;
 	}
-
-
 	hudCounter++;
 }
