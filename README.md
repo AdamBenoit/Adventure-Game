@@ -1,5 +1,5 @@
 # Adventure-Game
-My first Arduino project.
+My first Arduino project. Navigate the guy through a single level. Collect coins and kill bad guys while looking fot he key to the exit.
 
 Uses an Arduino Uno and a Keypad LCD Shield, a common design sold by DFRobot and various vendors on eBay, AliExpress etc. 
 
